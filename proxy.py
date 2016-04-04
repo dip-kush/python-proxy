@@ -229,7 +229,6 @@ def extract_python_session(data,url):
 					global login,global_session
 					global temp_login_info
 					#print 'In python'
-					#print data
 					output=''					
 					
                                         if url==logout_url:
@@ -239,7 +238,6 @@ def extract_python_session(data,url):
 					#print ses                
                                 	if m and ses=='':
                                         	#print 'Setcookie found'
-                                        	#print data
 						#print self.url
                                         	m = re.findall('sessionid=(.+?);',data)
                                         	output=""
@@ -634,9 +632,8 @@ class ConnectionHandler:
         self.timeout = timeout
         self.url=''
         self.method, self.path, self.protocol = self.get_base_header()
-	#print self.path
 	if '127.0.0.1' in self.path:
-		helloworld(self.client_buffer, self.path)
+		writeRequest(self.client_buffer, self.path)
         	if self.method=='CONNECT':
             		self.method_CONNECT()
         	elif self.method in ('OPTIONS', 'GET', 'HEAD', 'POST', 'PUT',
@@ -960,7 +957,7 @@ class ConnectionHandler:
 		break
         #print "Out of readwrite"
 
-def helloworld(packet, path):
+def writeRequest(packet, path):
 	print packet
 	if '127.0.0.1' in path:
 		f=open("requests.txt",'a')
